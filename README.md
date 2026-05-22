@@ -20,7 +20,8 @@ The API for this tool is limited to two commands. You are either encrypting plai
 Convert a plaintext file to an encrypted ciphertext file based on the pixel values of a .jpg file. 
 
 ```nix
-> ./photopad-cli encrypt --input ./path/to/plain.txt --key ./path/to/photo.jpg [--output ./custom/path/for/cipher.txt]
+> ./photopad-cli encrypt --input ./path/to/plain.txt \
+  --key ./path/to/photo.jpg [--output ./custom/path/for/cipher.txt]
 ```
 
 ## Decrypt
@@ -28,5 +29,6 @@ Convert a plaintext file to an encrypted ciphertext file based on the pixel valu
 Convert a ciphertext file to a decrypted plaintext file based on the pixel values of a .jpg file.
 
 ```nix
-> ./photopad-cli encrypt --input ./path/to/cipher.txt --key ./path/to/photo.jpg [--output ./custom/output/plain.txt]
+> ./photopad-cli encrypt --input ./path/to/cipher.txt \
+  --key ./path/to/photo.jpg [--output ./custom/output/plain.txt]
 ```
