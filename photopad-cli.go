@@ -62,23 +62,21 @@ func main() {
 		return
 	}
 
-	var inputPath = flag.String("input", "input.txt", "path to an existing .txt file")
-	var keyPath = flag.String("key", "key.jpg", "path to the .jpg file to use as a key")
-	var outputPath = flag.String("output", fmt.Sprintf(`./%s.output.txt`, cmd), "path to write the resulting .txt file")
+	inputPath := flag.String("input", "", "path to an existing .txt file")
+	// var keyPath = flag.String("key", "", "path to the .jpg file to use as a key")
+	// var outputPath = flag.String("output", fmt.Sprintf(`./%s.output.txt`, cmd), "path to write the resulting .txt file")
 
 	flag.Parse()
-	fmt.Println("input value:", *inputPath)
-	if cmd == "help" {
+
+	switch cmd {
+	case "help":
 		printHelp()
 		return
-	}
-
-	if cmd == "encrypt" {
-		encrypt(*inputPath, *keyPath, *outputPath)
+	case "encrypt":
+		// encrypt(*inputPath, *keyPath, *outputPath)
+		fmt.Println("input value:", *inputPath)
 		return
-	}
-
-	if cmd == "decrypt" {
+	case "decrypt":
 		decrypt()
 		return
 	}
