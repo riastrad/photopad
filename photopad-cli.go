@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"os"
 )
@@ -23,8 +24,12 @@ func decrypt() {
 	// 3. save the encoded document next to the original
 }
 
-func encrypt() {
-	fmt.Println("🍳 message scrambled!")
+func encrypt(inputPath string, keyPath string, outputPath string) {
+	fmt.Printf(`🍳 would have scrambled!
+input: %v
+key: %v
+output: %v
+`, inputPath, keyPath, outputPath)
 	// 1. func args should be the text loaded into memory & the pad
 	// 2. iterate through the txt & pad array, and for every latin character (shift the letter rightward)
 	// 3. save the encoded document next to the original
@@ -51,20 +56,29 @@ func main() {
 		printHelp()
 		return
 	}
-
 	cmd := os.Args[1]
+	if cmd != "help" && cmd != "encrypt" && cmd != "decrypt" {
+		fmt.Println("Invalid command. Must be one of: help, encrypt, decrypt")
+		return
+	}
 
+	var inputPath = flag.String("input", "input.txt", "path to an existing .txt file")
+	var keyPath = flag.String("key", "key.jpg", "path to the .jpg file to use as a key")
+	var outputPath = flag.String("output", fmt.Sprintf(`./%s.output.txt`, cmd), "path to write the resulting .txt file")
+
+	flag.Parse()
+	fmt.Println("input value:", *inputPath)
 	if cmd == "help" {
 		printHelp()
 		return
 	}
 
-	if cmd == "encode" {
-		encrypt()
+	if cmd == "encrypt" {
+		encrypt(*inputPath, *keyPath, *outputPath)
 		return
 	}
 
-	if cmd == "decode" {
+	if cmd == "decrypt" {
 		decrypt()
 		return
 	}
