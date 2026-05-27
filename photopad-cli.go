@@ -17,19 +17,23 @@ func shiftTxtWithPad() {}
 
 func unshiftTxtWithPad() {}
 
-func decrypt() {
-	fmt.Println("🥚 message unscrambled!")
+func decrypt(inputPath string, imageKeyPath string, outputPath string) {
+	fmt.Printf(`🥚 would have unscrambled!
+input: %v
+key: %v
+output: %v
+`, inputPath, imageKeyPath, outputPath)
 	// 1. func args should be the text loaded into memory & the pad
 	// 2. iterate through the txt & pad array, and for every latin character (shift the letter rightward)
 	// 3. save the encoded document next to the original
 }
 
-func encrypt(inputPath string, keyPath string, outputPath string) {
+func encrypt(inputPath string, imageKeyPath string, outputPath string) {
 	fmt.Printf(`🍳 would have scrambled!
 input: %v
 key: %v
 output: %v
-`, inputPath, keyPath, outputPath)
+`, inputPath, imageKeyPath, outputPath)
 	// 1. func args should be the text loaded into memory & the pad
 	// 2. iterate through the txt & pad array, and for every latin character (shift the letter rightward)
 	// 3. save the encoded document next to the original
@@ -51,33 +55,45 @@ options:
 
 }
 
+var (
+	inputPath    string
+	imageKeyPath string
+	outputPath   string
+)
+
 func main() {
-	if len(os.Args) <= 1 {
-		printHelp()
-		return
-	}
-	cmd := os.Args[1]
-	if cmd != "help" && cmd != "encrypt" && cmd != "decrypt" {
-		fmt.Println("Invalid command. Must be one of: help, encrypt, decrypt")
-		return
+	if len(os.Args) < 2 {
+		fmt.Println("Expected either 'encrypt' or 'decrypt' command")
+		os.Exit(1)
 	}
 
-	inputPath := flag.String("input", "", "path to an existing .txt file")
-	// var keyPath = flag.String("key", "", "path to the .jpg file to use as a key")
-	// var outputPath = flag.String("output", fmt.Sprintf(`./%s.output.txt`, cmd), "path to write the resulting .txt file")
+	encryptCmd := flag.NewFlagSet("encrypt", flag.ExitOnError)
+	encryptCmd.StringVar(&inputPath, "input", "", "path to the .txt input file")
+	encryptCmd.StringVar(&inputPath, "i", "", "path to the .txt input file (short)")
+	encryptCmd.StringVar(&imageKeyPath, "key", "", "path to the .jpg file to use as a key")
+	encryptCmd.StringVar(&imageKeyPath, "k", "", "path to the .jpg file to use as a key (short)")
+	encryptCmd.StringVar(&outputPath, "output", fmt.Sprintf(`./%s.output.txt`, os.Args[1]), "path to write the resulting .txt file")
+	encryptCmd.StringVar(&outputPath, "o", fmt.Sprintf(`./%sed.output.txt`, os.Args[1]), "path to write the resulting .txt file (short)")
 
-	flag.Parse()
+	decryptCmd := flag.NewFlagSet("decrypt", flag.ExitOnError)
+	decryptCmd.StringVar(&inputPath, "input", "default", "path to the .txt input file")
+	decryptCmd.StringVar(&inputPath, "i", "default", "path to the .txt input file (short)")
+	decryptCmd.StringVar(&imageKeyPath, "key", "", "path to the .jpg file to use as a key")
+	decryptCmd.StringVar(&imageKeyPath, "k", "", "path to the .jpg file to use as a key (short)")
+	decryptCmd.StringVar(&outputPath, "output", fmt.Sprintf(`./%s.output.txt`, os.Args[1]), "path to write the resulting .txt file")
+	decryptCmd.StringVar(&outputPath, "o", fmt.Sprintf(`./%sed.output.txt`, os.Args[1]), "path to write the resulting .txt file (short)")
 
-	switch cmd {
+	switch os.Args[1] {
 	case "help":
 		printHelp()
 		return
 	case "encrypt":
-		// encrypt(*inputPath, *keyPath, *outputPath)
-		fmt.Println("input value:", *inputPath)
+		encryptCmd.Parse(os.Args[2:])
+		encrypt(inputPath, imageKeyPath, outputPath)
 		return
 	case "decrypt":
-		decrypt()
+		decryptCmd.Parse(os.Args[2:])
+		decrypt(inputPath, imageKeyPath, outputPath)
 		return
 	}
 }
