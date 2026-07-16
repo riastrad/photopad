@@ -6,26 +6,13 @@ import (
 	"os"
 
 	"github.com/riastrad/photopad/lib"
+	"github.com/riastrad/photopad/utils"
 )
-
-func printHelp() {
-	fmt.Print(`A picture's worth a thousand pads.™
-
-cmds:
-  help   : print this help message
-  encrypt: convert plaintext to ciphertext based on a provided .jpg file
-  decrypt: convert ciphertext to plaintext based on a provided .jpg file
-
-options:
-  --input, -i : path to a plaintext file
-  --key, -k   : path to a valid .jpg file
-`)
-
-}
 
 var (
 	inputPath    string
 	imageKeyPath string
+	outputPath   string
 )
 
 func main() {
