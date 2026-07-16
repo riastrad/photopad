@@ -3,17 +3,16 @@ package lib
 import (
 	"fmt"
 	"strings"
-	"unicode"
 
 	"github.com/riastrad/photopad/utils"
 )
 
 func DecodeLetter(letter rune, shift uint8) rune {
-	if letter > unicode.MaxASCII {
+	if letter > utils.BOUNDARY {
 		return letter
 	}
 
-	oldUnicodePoint := (int(letter) + (unicode.MaxASCII - (int(shift) % unicode.MaxASCII))) % unicode.MaxASCII
+	oldUnicodePoint := (int(letter) + (int(utils.BOUNDARY) - (int(shift) % int(utils.BOUNDARY)))) % int(utils.BOUNDARY)
 	return rune(oldUnicodePoint)
 }
 
