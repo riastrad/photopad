@@ -9,6 +9,11 @@ import (
 )
 
 func ReadTxt(path string) string {
+	extension := filepath.Ext(path)
+	if extension != ".txt" {
+		log.Fatalf("Text format %s is not supported. Currently only .txt files can be (en|de)crypted.", extension)
+	}
+
 	b, err := os.ReadFile(path)
 	if err != nil {
 		log.Fatal(err)
@@ -26,7 +31,7 @@ func SaveTxt(path string, txt string) {
 func ReadJpegPhoto(path string) image.Image {
 	extension := filepath.Ext(path)
 	if extension != ".jpg" && extension != ".jpeg" {
-		log.Fatalf("Image format %s is not supported. Only JPEG files supported currently.", extension)
+		log.Fatalf("Image format %s is not supported. Currently only .jp(e)g files supported.", extension)
 	}
 
 	imageFile, readErr := os.Open(path)
