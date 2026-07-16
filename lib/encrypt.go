@@ -31,9 +31,9 @@ func ShiftTxtWithPad(txt string, pads []uint8) string {
 	return string(outputString)
 }
 
-func Encrypt(inputPath string, imageKeyPath string) {
+func Encrypt(inputPath string, imageKeyPath string, outputPath string) {
 	inputText := utils.ReadTxt(inputPath)
-	fmt.Printf("✔ loaded text from: %s\n", inputPath)
+	fmt.Printf("\n✔ loaded text from: %s\n", inputPath)
 
 	pads := utils.GetPadFromImage(imageKeyPath)
 	fmt.Printf("✔ generated pad from: %s\n", imageKeyPath)
@@ -41,7 +41,9 @@ func Encrypt(inputPath string, imageKeyPath string) {
 	output := ShiftTxtWithPad(inputText, pads)
 	fmt.Println("✔ ciphered text with pad")
 
-	outputPath := strings.Replace(inputPath, ".txt", ".encrypted.txt", 1)
+	if outputPath == "" {
+		outputPath = strings.Replace(inputPath, ".txt", ".encrypted.txt", 1)
+	}
 	utils.SaveTxt(outputPath, output)
-	fmt.Printf("💾 saved output to: %s\n", outputPath)
+	fmt.Printf("\n💾 saved output to: %s\n", outputPath)
 }
