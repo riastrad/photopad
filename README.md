@@ -1,6 +1,10 @@
-# photopad
+<div align=center>
+    <h1>photopad</h1>
+    <img src="./docs/banner-image.jpg" />
+    <p>A picture's worth a thousand pads.™</p>
+</div>
 
-A picture's worth a thousand pads.™
+# Overview
 
 Photopad is a small CLI tool which will take plain text and a jpeg image as input, convert the image's pixels into a "[pre-shared key](https://en.wikipedia.org/wiki/Pre-shared_key)", and then use this key as a cryptographic pad to encrypt the provided text, and vice versa.
 
