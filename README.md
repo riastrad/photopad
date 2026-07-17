@@ -39,4 +39,4 @@ Convert a ciphertext file to a decrypted plaintext file based on the pixel value
 
 # Still Have Questions?
 
-This `README` intentionally doesn't dive too deeply on the inner operations. If you made it to the bottom and you want to learn more about the internals (without having to read my amature go code), you can read the [blog post]() I wrote when I finished the first version.
+This `README` intentionally doesn't dive too deeply on the inner operations. If you made it to the bottom and you want to learn more about the internals (without having to read my amature go code), you can read the [blog post](https://cyberb.space/notes/2026/photopad-encrypting-text-with-jpeg-files) I wrote when I finished the first version.
