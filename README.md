@@ -1,7 +1,7 @@
 <div align=center>
-    <h1 style="font-family:monospace">PHOTOPAD</h1>
-    <img src="./docs/banner-image.jpg" />
+    <h1>PHOTOPAD</h1>
     <p>A picture's worth a thousand pads.™</p>
+    <img src="./docs/banner-image.jpg" />
 </div>
 
 # Overview
